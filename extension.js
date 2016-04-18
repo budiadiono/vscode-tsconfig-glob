@@ -38,10 +38,11 @@ function start(params) {
     watcher.onDidChange(generateFiles)
     watcher.onDidDelete(generateFiles)
     watcher.onDidCreate(generateFiles);
+    
+    vscode.window.showInformationMessage('vscode-tsconfig-glob is active. To disable, please specify "vscode" : { \"rewriteTsconfig\" : false } in tsconfig.json file.');
 }
 
-function generateFiles() {
-    console.log('***GENERATE***');
+function generateFiles() {    
     var tsConfig = require("tsconfig-glob");
     tsConfig({
         configPath: vscode.workspace.rootPath,
@@ -51,7 +52,7 @@ function generateFiles() {
 }
 
 function quit(params) {
-    vscode.window.showInformationMessage('File tsconfig.json was not found in your root directory.');
+    // TODO: anything to do?
 }
 
 exports.activate = activate;
