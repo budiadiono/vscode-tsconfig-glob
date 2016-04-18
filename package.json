@@ -6,7 +6,6 @@
         "typescript",
         "tsconfig",
         "tsconfig-glob",
-        "atom",
         "filesGlob",
         "glob"
     ],
