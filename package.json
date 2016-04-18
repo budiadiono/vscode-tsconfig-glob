@@ -1,0 +1,29 @@
+{
+  "name": "vscode-tsconfig-glob",
+  "displayName": "tsconfig-glob",
+  "description": "Generate files value on tsconfig.json based on filesGlob just like in Atom editor.",
+  "keywords": [
+      "typescript", "tsconfig", "tsconfig-glob", "atom", "filesGlob", "glob"      
+  ],
+  "version": "0.0.1",
+  "publisher": "Adiono",  
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension",
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "vscode": "^0.11.0"
+  },
+  "dependencies": {
+    "tsconfig-glob": "^0.4.3"
+  }
+}
