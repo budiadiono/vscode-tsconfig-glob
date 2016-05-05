@@ -37,9 +37,7 @@ function start(params) {
     var watcher = vscode.workspace.createFileSystemWatcher('{' + globs.join(',') + '}');
     watcher.onDidChange(generateFiles)
     watcher.onDidDelete(generateFiles)
-    watcher.onDidCreate(generateFiles);
-    
-    vscode.window.showInformationMessage('vscode-tsconfig-glob is active. To disable, please specify "vscode" : { \"rewriteTsconfig\" : false } in tsconfig.json file.');
+    watcher.onDidCreate(generateFiles);       
 }
 
 function generateFiles() {    
