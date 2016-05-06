@@ -1,14 +1,19 @@
 var vscode = require('vscode');
+var Path = require('path')
 
 function activate(context) {
-    // Start cooking the tsconfig.json
-    vscode.workspace.openTextDocument(vscode.workspace.rootPath + '/tsconfig.json').then(start, quit);
+    // Find all tsconfig.json in a workspace    
+    vscode.workspace.findFiles('**/tsconfig.json', '**/node_modules/**').then(function (files) {        
+        files.forEach(function(file) {            
+            start(file.fsPath);
+        }, this); 
+    }, quit);
 }
 
-function start(params) {
+function start(fileName) {
     // Find tsconfig.json
     var fs = require('fs');
-    var tsconfig = JSON.parse(fs.readFileSync(params.fileName));
+    var tsconfig = JSON.parse(fs.readFileSync(fileName));
 
     // Ensure vscode.rewriteTsconfig option is not FALSE
     var vcode = tsconfig.vscode;
@@ -32,21 +37,26 @@ function start(params) {
     }
     if (!globs.length)
         return;
+    
 
     // Watch files defined in filesGlob
     var watcher = vscode.workspace.createFileSystemWatcher('{' + globs.join(',') + '}');
-    watcher.onDidChange(generateFiles)
-    watcher.onDidDelete(generateFiles)
-    watcher.onDidCreate(generateFiles);       
+    var configPath = Path.dirname(fileName)
+    watcher.onDidChange(generateFiles(configPath))
+    watcher.onDidDelete(generateFiles(configPath))
+    watcher.onDidCreate(generateFiles(configPath));       
 }
 
-function generateFiles() {    
+function generateFiles(configPath) {    
     var tsConfig = require("tsconfig-glob");
-    tsConfig({
-        configPath: vscode.workspace.rootPath,
-        cwd: process.cwd(),
-        indent: 2
-    });
+    
+    return function () {
+        tsConfig({
+            configPath: configPath,
+            cwd: process.cwd(),
+            indent: 2
+        });        
+    }
 }
 
 function quit(params) {
