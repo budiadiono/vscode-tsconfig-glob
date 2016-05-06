@@ -9,7 +9,7 @@
         "filesGlob",
         "glob"
     ],
-    "version": "0.0.2",
+    "version": "0.1.0",
     "publisher": "budiadiono",
     "homepage": "https://github.com/budiadiono/vscode-tsconfig-glob",
     "repository": {
