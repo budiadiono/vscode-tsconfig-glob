@@ -1,7 +1,7 @@
 # tsconfig-glob
 ## Generate files value on tsconfig.json based on filesGlob.
 
-You can specify a `filesGlob` pattern in your `tsconfig.json` file in root directory and this extension automatically generate list of files. 
+You can specify a `filesGlob` pattern in your `tsconfig.json` files and this extension automatically generate list of files. 
 Yes just like in [atom-typescript](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md) plugin when you are using **Atom** editor.
 
 ### rewriteTsconfig
